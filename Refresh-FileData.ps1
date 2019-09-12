@@ -28,7 +28,7 @@ if ((Test-Path -Path $internalLogPath) -eq $false)
 #The below would be run on a scheduled basis. For example, via Task Scheduler on Windows
 #Test if the refresh signal is present via a file objects' presence on the file system
 if (Test-Path $refreshIdentFilePath)
-{   
+{
     #Options for the robocopy - Mirror + Restart + Backup Mode + Retry Once + Wait 0 Seconds + Copy File Data, Attributes, Timestamps, Security, Ownership + Copy Directory\
     #cont'd: Data, Attributes, Timestamps + Multithread 16 Threads + Exclude Junction Points + Report Extra Files + Verbosity + Show Timestamps + Show Full Path + Do Not Show Progress + Log destination
     #Build the Robocopy command using source and destination params. The options for Robocopy are static for now. Take note of the log file path param.
@@ -37,7 +37,7 @@ if (Test-Path $refreshIdentFilePath)
 
 
     New-Item -Path:$refreshSuccessFilePath  -ItemType:File -Value:"Refresh Complete at approximately $(get-date -f yyyy-MM-dd-hh.mm.ss)"
-    
+ 
     #Write to the Windows event log
     #Check if event log source exists, in this case, "PSRoboRefresh" is the source. A source must be registered to write to a windows event log
     if ([System.Diagnostics.EventLog]::SourceExists("PSRoboRefresh") -ne $true)
@@ -62,7 +62,7 @@ if (Test-Path $refreshIdentFilePath)
     Exit
 
 }
-    else 
+    else
     {
         #If the run does not occur on this iterations examination, just note such in the log to track that it is in fact still running the check
         $currentLogMessage = "`n`n`rSkipped on $(get-date -f yyyy-MM-dd-hh.mm.ss)"
